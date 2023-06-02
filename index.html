@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calculadora</title>
+  <style>
+    .calculator {
+      width: 300px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+    }
+
+    .calculator input {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 5px;
+    }
+
+    .calculator .btn {
+      width: 50px;
+      height: 30px;
+      margin-right: 5px;
+    }
+
+    .calculator .btn:last-child {
+      margin-right: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <input type="text" id="result" readonly>
+    <div>
+      <button class="btn" onclick="appendNumber(1)">1</button>
+      <button class="btn" onclick="appendNumber(2)">2</button>
+      <button class="btn" onclick="appendNumber(3)">3</button>
+      <button class="btn" onclick="appendOperator('+')">+</button>
+    </div>
+    <div>
+      <button class="btn" onclick="appendNumber(4)">4</button>
+      <button class="btn" onclick="appendNumber(5)">5</button>
+      <button class="btn" onclick="appendNumber(6)">6</button>
+      <button class="btn" onclick="appendOperator('-')">-</button>
+    </div>
+    <div>
+      <button class="btn" onclick="appendNumber(7)">7</button>
+      <button class="btn" onclick="appendNumber(8)">8</button>
+      <button class="btn" onclick="appendNumber(9)">9</button>
+      <button class="btn" onclick="appendOperator('*')">*</button>
+    </div>
+    <div>
+      <button class="btn" onclick="appendNumber(0)">0</button>
+      <button class="btn" onclick="clearResult()">C</button>
+      <button class="btn" onclick="calculateResult()">=</button>
+      <button class="btn" onclick="appendOperator('/')">/</button>
+    </div>
+  </div>
+
+  <script>
+    var resultInput = document.getElementById("result");
+    var currentExpression = "";
+
+    function appendNumber(number) {
+      currentExpression += number;
+      resultInput.value = currentExpression;
+    }
+
+    function appendOperator(operator) {
+      currentExpression += operator;
+      resultInput.value = currentExpression;
+    }
+
+    function calculateResult() {
+      try {
+        var result = eval(currentExpression);
+        resultInput.value = result;
+        currentExpression = "";
+      } catch (error) {
+        resultInput.value = "Error";
+      }
+    }
+
+    function clearResult() {
+      currentExpression = "";
+      resultInput.value = "";
+    }
+  </script>
+</body>
+</html>
